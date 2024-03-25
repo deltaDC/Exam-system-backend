@@ -24,4 +24,10 @@ public class ExamController {
     public ResponseEntity<?> createExam(@RequestBody Exam exam) {
         return examService.createExam(exam);
     }
+
+    //xoa exam theo id
+    @DeleteMapping("/delete-exam/{examId}")
+    public ResponseEntity<?> deleteExamById(@PathVariable("examId") Long examId) {
+        return examService.deleteExamById(examId);
+    }
 }

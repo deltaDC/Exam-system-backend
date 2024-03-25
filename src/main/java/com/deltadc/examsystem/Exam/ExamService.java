@@ -34,4 +34,18 @@ public class ExamService {
 
         return ResponseEntity.ok(newExam);
     }
+
+    public ResponseEntity<?> deleteExamById(Long examId) {
+        Exam exam = examRepository.findById(examId).orElse(null);
+
+        if (exam == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("ko tim thay exam theo id");
+        }
+
+        examRepository.deleteById(examId);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("da xoa exam theo id");
+    }
 }
