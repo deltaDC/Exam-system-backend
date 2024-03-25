@@ -19,6 +19,12 @@ public class ExamController {
         return examService.getExamById(examId);
     }
 
+    //lay tat ca cac exam dang co
+    @GetMapping("get-all-exams")
+    public ResponseEntity<?> getAllExams() {
+        return examService.getAllExams();
+    }
+
     //tao exam moi
     @PostMapping("/create-exam")
     public ResponseEntity<?> createExam(@RequestBody Exam exam) {

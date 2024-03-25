@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ExamService {
@@ -47,5 +49,11 @@ public class ExamService {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body("da xoa exam theo id");
+    }
+
+    public ResponseEntity<?> getAllExams() {
+        List<Exam> exams = examRepository.findAll();
+
+        return ResponseEntity.ok(exams);
     }
 }
