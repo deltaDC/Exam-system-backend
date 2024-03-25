@@ -2,6 +2,7 @@ package com.deltadc.examsystem.Question;
 
 import com.deltadc.examsystem.Exam.Exam;
 import com.deltadc.examsystem.UserAnswer.UserAnswer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,7 @@ public class Question {
     private Long examId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "examId", insertable = false, updatable=false)
     private Exam exam;
 

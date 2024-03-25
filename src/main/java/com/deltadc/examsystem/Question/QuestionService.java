@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +38,11 @@ public class QuestionService {
         questionRepository.save(q);
 
         return ResponseEntity.ok(q);
+    }
+
+    public ResponseEntity<?> getQuestionById(Long questionId) {
+//        Question q = questionRepository.findById(questionId).orElseThrow();
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        return ResponseEntity.ok(optionalQuestion);
     }
 }

@@ -12,9 +12,16 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
-    @PostMapping("create-question/{examId}")
+    //tao question moi
+    @PostMapping("/create-question/{examId}")
     public ResponseEntity<?> createQuestion(@RequestBody Question question, @PathVariable("examId") Long examId) {
         return questionService.createQuestion(question, examId);
+    }
+
+    //lay question theo id
+    @GetMapping("/{questionId}")
+    public ResponseEntity<?> getQuestionById(@PathVariable("questionId") Long questionId) {
+        return questionService.getQuestionById(questionId);
     }
 
 }
