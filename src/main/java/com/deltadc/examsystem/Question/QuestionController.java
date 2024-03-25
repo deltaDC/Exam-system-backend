@@ -36,9 +36,16 @@ public class QuestionController {
         return questionService.getQuestionsByExamId(examId);
     }
 
+    //xoa question theo id
     @DeleteMapping("/delete/{questionId}")
     public ResponseEntity<?> deleteQuestionById(@PathVariable("questionId") Long questionId) {
         return questionService.deleteQuestionById(questionId);
+    }
+
+    //edit question theo id
+    @PutMapping("/edit/{questionId}")
+    public ResponseEntity<?> editQuestionById(@PathVariable("questionId") Long questionId, @RequestBody Question newQuestion) {
+        return questionService.editQuestionById(questionId, newQuestion);
     }
 
 }

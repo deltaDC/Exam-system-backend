@@ -62,4 +62,20 @@ public class QuestionService {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("da xoa question theo id");
     }
+
+    public ResponseEntity<?> editQuestionById(Long questionId, Question newQuestion) {
+        Question q = questionRepository.findById(questionId).orElseThrow();
+
+        q.setExamId(newQuestion.getExamId());
+        q.setQuestionText(newQuestion.getQuestionText());
+        q.setAnswerOptionA(newQuestion.getAnswerOptionA());
+        q.setAnswerOptionB(newQuestion.getAnswerOptionB());
+        q.setAnswerOptionC(newQuestion.getAnswerOptionC());
+        q.setAnswerOptionD(newQuestion.getAnswerOptionD());
+        q.setCorrectAnswer(newQuestion.getCorrectAnswer());
+
+        questionRepository.save(q);
+
+        return ResponseEntity.ok(q);
+    }
 }

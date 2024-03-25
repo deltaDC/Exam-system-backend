@@ -37,7 +37,7 @@ public class ExamController {
         return examService.deleteExamById(examId);
     }
 
-    @PutMapping("/edit-exam/{examId}")
+    @PutMapping("/edit/{examId}")
     public ResponseEntity<?> editExam(@PathVariable("examId") Long examId, @RequestBody Exam newExam) {
         return examService.editExamById(examId, newExam);
     }
