@@ -30,4 +30,9 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
 
+    //lay question theo tung exam
+    @GetMapping("/get-all-questions/{examId}")
+    public ResponseEntity<?> getQuestionsByExamId(@PathVariable("examId") Long examId) {
+        return questionService.getQuestionsByExamId(examId);
+    }
 }

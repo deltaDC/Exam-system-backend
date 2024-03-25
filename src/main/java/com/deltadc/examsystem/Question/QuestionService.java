@@ -50,4 +50,9 @@ public class QuestionService {
         List<Question> questionList = questionRepository.findAll();
         return ResponseEntity.ok(questionList);
     }
+
+    public ResponseEntity<?> getQuestionsByExamId(Long examId) {
+        List<Question> questionList = questionRepository.findByExamId(examId);
+        return ResponseEntity.ok(questionList);
+    }
 }
