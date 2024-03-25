@@ -24,4 +24,10 @@ public class QuestionController {
         return questionService.getQuestionById(questionId);
     }
 
+    //lay tat ca cac question
+    @GetMapping("/get-all-questions")
+    public ResponseEntity<?> getAllQuestions() {
+        return questionService.getAllQuestions();
+    }
+
 }

@@ -45,4 +45,9 @@ public class QuestionService {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         return ResponseEntity.ok(optionalQuestion);
     }
+
+    public ResponseEntity<?> getAllQuestions() {
+        List<Question> questionList = questionRepository.findAll();
+        return ResponseEntity.ok(questionList);
+    }
 }
