@@ -55,4 +55,11 @@ public class QuestionService {
         List<Question> questionList = questionRepository.findByExamId(examId);
         return ResponseEntity.ok(questionList);
     }
+
+    public ResponseEntity<?> deleteQuestionById(Long questionId) {
+        Question q = questionRepository.findById(questionId).orElseThrow();
+        questionRepository.deleteById(questionId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("da xoa question theo id");
+    }
 }

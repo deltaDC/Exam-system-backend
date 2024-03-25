@@ -35,4 +35,10 @@ public class QuestionController {
     public ResponseEntity<?> getQuestionsByExamId(@PathVariable("examId") Long examId) {
         return questionService.getQuestionsByExamId(examId);
     }
+
+    @DeleteMapping("/delete/{questionId}")
+    public ResponseEntity<?> deleteQuestionById(@PathVariable("questionId") Long questionId) {
+        return questionService.deleteQuestionById(questionId);
+    }
+
 }
