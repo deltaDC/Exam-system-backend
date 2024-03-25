@@ -32,8 +32,10 @@ public class Question {
 
     private String correctAnswer;
 
+    private Long examId;
+
     @ManyToOne
-    @JoinColumn(name = "examId")
+    @JoinColumn(name = "examId", insertable = false, updatable=false)
     private Exam exam;
 
     @OneToOne
