@@ -5,6 +5,7 @@ import com.deltadc.examsystem.ExamResult.ExamResult;
 import com.deltadc.examsystem.ExamStatistic.ExamStatistic;
 import com.deltadc.examsystem.Question.Question;
 import com.deltadc.examsystem.UserAnswer.UserAnswer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +34,11 @@ public class Exam {
     private String examType;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC")
     private Date startTime;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC")
     private Date endTime;
 
     @OneToMany(mappedBy = "exam")

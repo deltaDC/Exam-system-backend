@@ -56,4 +56,25 @@ public class ExamService {
 
         return ResponseEntity.ok(exams);
     }
+
+    public ResponseEntity<?> editExamById(Long examId, Exam newExam) {
+        Exam exam = examRepository.findById(examId).orElse(null);
+
+        if (exam == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("ko tim thay exam theo id");
+        }
+
+        exam.setExamName(newExam.getExamName());
+        exam.setDescription(newExam.getDescription());
+        exam.setExamType(newExam.getExamType());
+        exam.setStartTime(newExam.getStartTime());
+        exam.setEndTime(newExam.getEndTime());
+
+        examRepository.save(exam);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("da sua exam");
+
+    }
 }
