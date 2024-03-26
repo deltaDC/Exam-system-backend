@@ -4,6 +4,7 @@ package com.deltadc.examsystem.User;
 import com.deltadc.examsystem.ExamAttempt.ExamAttempt;
 import com.deltadc.examsystem.ExamResult.ExamResult;
 import com.deltadc.examsystem.UserAnswer.UserAnswer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,11 +36,14 @@ public class User implements UserDetails {
     private String role;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserAnswer> userAnswers;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<ExamResult> examResults;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<ExamAttempt> examAttempts;
 

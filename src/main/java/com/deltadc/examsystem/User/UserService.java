@@ -26,4 +26,10 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("da xoa nguoi dung theo id");
     }
+
+    public ResponseEntity<?> findUserByUserName(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+        return ResponseEntity.ok(user);
+    }
 }

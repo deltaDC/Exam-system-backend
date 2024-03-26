@@ -16,9 +16,18 @@ public class UserController {
 //        return userService.changePassword(newPassword);
 //    }
 
+    //xoa user
     @DeleteMapping("/delete-user/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable("userId") Long userId) {
         return userService.deleteUserByUserId(userId);
+    }
+
+    //chinh sua username va password
+
+    //tim sinh vien theo username
+    @GetMapping("{username}")
+    public ResponseEntity<?> findUserByUsername(@PathVariable("username") String username){
+        return userService.findUserByUserName(username);
     }
 
 }
