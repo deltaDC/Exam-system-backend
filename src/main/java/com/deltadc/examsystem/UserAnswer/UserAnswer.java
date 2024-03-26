@@ -4,6 +4,7 @@ package com.deltadc.examsystem.UserAnswer;
 import com.deltadc.examsystem.Exam.Exam;
 import com.deltadc.examsystem.Question.Question;
 import com.deltadc.examsystem.User.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,15 +25,29 @@ public class UserAnswer {
 
     private String selectedAnswer;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "examId")
+    @JoinColumn(name = "examId", insertable = false, updatable = false)
     private Exam exam;
 
+    @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "questionId")
+    @JoinColumn(name = "questionId", insertable = false, updatable = false)
     private Question question;
+
+    private Long userId;
+    private Long examId;
+    private Long questionId;
+
+    public UserAnswer(Long userId, Long examId, Long questionId, String selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
+        this.userId = userId;
+        this.examId = examId;
+        this.questionId = questionId;
+    }
 }

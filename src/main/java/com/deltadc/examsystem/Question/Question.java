@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -40,7 +42,8 @@ public class Question {
     @JoinColumn(name = "examId", insertable = false, updatable=false)
     private Exam exam;
 
-    @OneToOne
-    @JoinColumn(name = "questionId")
-    private UserAnswer userAnswer;
+    @OneToMany
+    @JsonIgnore
+    @JoinColumn(name = "questionId", insertable = false, updatable=false)
+    private List<UserAnswer> userAnswers;
 }
