@@ -56,4 +56,21 @@ public class AuthService {
                         .build()
                 );
     }
+
+    public ResponseEntity<AuthResponse> signupAdmin(SignUpRequest request) {
+        if(userRepository.findByUsername(request.getUsername()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(AuthResponse.builder().message("admin da ton tai").build());
+        }
+
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole("ADMIN");
+
+        userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(AuthResponse.builder().message("tao moi admin thanh cong").build());
+    }
 }
