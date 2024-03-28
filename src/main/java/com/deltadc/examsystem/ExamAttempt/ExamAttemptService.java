@@ -57,4 +57,10 @@ public class ExamAttemptService {
 
         return ResponseEntity.ok(examAttemptList);
     }
+
+    public ResponseEntity<?> getTotalAttempts(Long examId) {
+        List<ExamAttempt> examAttemptList = examAttemptRepository.findByExamId(examId);
+
+        return ResponseEntity.ok(examAttemptList.size());
+    }
 }

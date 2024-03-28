@@ -40,4 +40,11 @@ public class ExamAttemptController {
     public ResponseEntity<?> getExamAttemptByExamId(@PathVariable("examId") Long examId) {
         return examAttemptService.getExamAttemptByExamId(examId);
     }
+
+    //lay tong so luong nguoi dung tham gia moi ki thi theo examId (tinh ca chua hoan thanh)
+    @GetMapping("/exam/{examId}/total-attempts")
+    public ResponseEntity<?> getTotalAttempts(@PathVariable("examId") Long examId) {
+        return examAttemptService.getTotalAttempts(examId);
+    }
+
 }

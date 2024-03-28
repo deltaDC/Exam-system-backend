@@ -58,4 +58,10 @@ public class ExamResultController {
     public ResponseEntity<?> editExamResultById(@PathVariable("examResultId") Long examResultId, @RequestBody ExamResult newExamResult) {
         return examResultService.editExamResultById(examResultId, newExamResult);
     }
+
+    //lay diem trung binh cua mot exam
+    @GetMapping("/exam/{examId}/average-score")
+    public ResponseEntity<?> getExamAverageScore(@PathVariable("examId") Long examId) {
+        return examResultService.getExamAverageScore(examId);
+    }
 }

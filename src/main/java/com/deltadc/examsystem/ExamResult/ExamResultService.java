@@ -99,4 +99,17 @@ public class ExamResultService {
 
         return ResponseEntity.ok(examResult);
     }
+
+    public ResponseEntity<?> getExamAverageScore(Long examId) {
+        Exam exam = examRepository.findById(examId).orElseThrow();
+
+        List<ExamResult> examResultList = examResultRepository.findByExamId(examId);
+        int totalScore = 0;
+        for(ExamResult e : examResultList) {
+            totalScore += e.getScore();
+        }
+        double average = (double) totalScore / examResultList.size();
+
+        return ResponseEntity.ok(average);
+    }
 }
