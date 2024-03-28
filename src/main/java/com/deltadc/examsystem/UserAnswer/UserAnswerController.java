@@ -2,6 +2,7 @@ package com.deltadc.examsystem.UserAnswer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -39,6 +40,18 @@ public class UserAnswerController {
     @GetMapping("/question/{questionId}")
     public ResponseEntity<?> getUserAnswerByQuestionId(@PathVariable("questionId") Long questionId) {
         return userAnswerService.getUserAnswerByQuestionId(questionId);
+    }
+
+    //lay useranswer theo userId va examId (dap an cua nguoi dung trong 1 bai kiem tra)
+    @GetMapping("/exam/{examId}/user/{userId}")
+    public ResponseEntity<?> getUserAnswerInAnExam(@PathVariable("examId") Long examId, @PathVariable("userId") Long userId) {
+        return userAnswerService.getUserAnswerInAnExam(examId, userId);
+    }
+
+    //xoa useranswer theo userId va questionId
+    @DeleteMapping("/delete/question/{questionId}/user/{userId}")
+    public ResponseEntity<?> deleteUserAnswer(@PathVariable("questionId") Long questionId, @PathVariable("userId") Long userId) {
+        return userAnswerService.deleteUserAnswer(questionId, userId);
     }
 
 }

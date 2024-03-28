@@ -48,4 +48,18 @@ public class UserAnswerService {
 
         return ResponseEntity.ok(userAnswer);
     }
+
+    public ResponseEntity<?> getUserAnswerInAnExam(Long examId, Long userId) {
+        List<UserAnswer> userAnswer = userAnswerRepository.findByExamIdAndUserId(examId, userId);
+
+        return ResponseEntity.ok(userAnswer);
+    }
+
+    public ResponseEntity<?> deleteUserAnswer(Long questionId, Long userId) {
+        UserAnswer userAnswer = userAnswerRepository.findByQuestionIdAndUserId(questionId, userId);
+
+        userAnswerRepository.delete(userAnswer);
+
+        return ResponseEntity.ok("da xoa useranswer");
+    }
 }
