@@ -112,4 +112,13 @@ public class ExamResultService {
 
         return ResponseEntity.ok(average);
     }
+
+    public ResponseEntity<?> getUserResults(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+        Long userId = user.getUserId();
+
+        List<ExamResult> userResults = examResultRepository.findByUserId(userId);
+
+        return ResponseEntity.ok(userResults);
+    }
 }

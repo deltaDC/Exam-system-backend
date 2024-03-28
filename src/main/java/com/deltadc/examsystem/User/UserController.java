@@ -25,7 +25,7 @@ public class UserController {
     //chinh sua username va password
 
     //tim sinh vien theo username
-    @GetMapping("{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<?> findUserByUsername(@PathVariable("username") String username){
         return userService.findUserByUserName(username);
     }

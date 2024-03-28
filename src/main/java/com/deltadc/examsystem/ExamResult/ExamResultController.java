@@ -64,4 +64,10 @@ public class ExamResultController {
     public ResponseEntity<?> getExamAverageScore(@PathVariable("examId") Long examId) {
         return examResultService.getExamAverageScore(examId);
     }
+
+    //tim kiem sinh vien bang username va lay ket qua thi cua ho
+    @GetMapping("/{username}/results")
+    public ResponseEntity<?> getUserResults(@PathVariable("username") String username) {
+        return examResultService.getUserResults(username);
+    }
 }
