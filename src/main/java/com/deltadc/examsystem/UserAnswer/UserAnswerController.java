@@ -13,7 +13,7 @@ public class UserAnswerController {
 
     private final UserAnswerService userAnswerService;
 
-    //tao useranswer moi
+    //tao useranswer moi va kiem tra xem co dung voi questionId khong
     @PostMapping("/create-user-answer")
     public ResponseEntity<?> createUserAnswer(@RequestBody UserAnswer userAnswer) {
         return userAnswerService.createUserAnswer(userAnswer);

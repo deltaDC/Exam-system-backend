@@ -1,5 +1,7 @@
 package com.deltadc.examsystem.UserAnswer;
 
+import com.deltadc.examsystem.Question.Question;
+import com.deltadc.examsystem.Question.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import java.util.List;
 public class UserAnswerService {
 
     private final UserAnswerRepository userAnswerRepository;
+    private final QuestionRepository questionRepository;
 
     public ResponseEntity<?> createUserAnswer(UserAnswer userAnswer) {
         UserAnswer newUserAnswer = new UserAnswer(
@@ -22,7 +25,14 @@ public class UserAnswerService {
 
         userAnswerRepository.save(newUserAnswer);
 
-        return ResponseEntity.ok(newUserAnswer);
+        Question question = questionRepository.findById(newUserAnswer.getQuestionId()).orElseThrow();
+        String correctAnswer = question.getCorrectAnswer();
+
+        if(correctAnswer.equalsIgnoreCase(userAnswer.getSelectedAnswer())) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+//        return ResponseEntity.ok(newUserAnswer);
     }
 
     public ResponseEntity<?> getUserAnswerById(Long userAnswerId) {
