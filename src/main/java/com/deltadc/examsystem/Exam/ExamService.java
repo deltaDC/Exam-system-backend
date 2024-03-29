@@ -77,4 +77,16 @@ public class ExamService {
                 .body("da sua exam");
 
     }
+
+    public ResponseEntity<?> getExamByExamName(String examName) {
+        List<Exam> exam = examRepository.findByExamNameContaining(examName);
+
+        return ResponseEntity.ok(exam);
+    }
+
+    public ResponseEntity<?> getExamByExamType(String examType) {
+        List<Exam> exam = examRepository.findByExamTypeContaining(examType);
+
+        return ResponseEntity.ok(exam);
+    }
 }

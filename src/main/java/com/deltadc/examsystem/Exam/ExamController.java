@@ -21,7 +21,7 @@ public class ExamController {
     }
 
     //lay tat ca cac exam dang co
-    @GetMapping("get-all-exams")
+    @GetMapping("/get-all-exams")
     public ResponseEntity<?> getAllExams() {
         return examService.getAllExams();
     }
@@ -42,5 +42,17 @@ public class ExamController {
     @PutMapping("/edit/{examId}")
     public ResponseEntity<?> editExam(@PathVariable("examId") Long examId, @RequestBody Exam newExam) {
         return examService.editExamById(examId, newExam);
+    }
+
+    //tim kiem exam theo examName
+    @GetMapping("/exam-name/{examName}")
+    public ResponseEntity<?> getExamByExamName(@PathVariable("examName") String examName) {
+        return examService.getExamByExamName(examName);
+    }
+
+    //tim kiem exam theo examType
+    @GetMapping("/exam-type/{examType}")
+    public ResponseEntity<?> getExamByExamType(@PathVariable("examType") String examType) {
+        return examService.getExamByExamType(examType);
     }
 }
