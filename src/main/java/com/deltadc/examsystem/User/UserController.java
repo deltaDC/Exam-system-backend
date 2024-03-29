@@ -31,4 +31,15 @@ public class UserController {
         return userService.findUserByUserName(username);
     }
 
+    //lay tat ca cac user khong phai admin
+    @GetMapping("/all-users")
+    public ResponseEntity<?> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    //lay tat ca cac user la admin
+    @GetMapping("/all-admins")
+    public ResponseEntity<?> getAllAdmins() {
+        return userService.getAllAdmins();
+    }
 }
