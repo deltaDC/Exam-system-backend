@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        final String userEmail;
+        final String userName;
 
         // Người dùng chưa được xác thực -> chuyển tới filter khác
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -42,22 +42,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(jwt);
+
+        //lấy username từ claims
+        userName = jwtService.extractUsername(jwt);
 
         // Kiểm tra nếu địa chỉ email của người dùng đã được trích xuất từ token và
         // không có thông tin xác thực nào trong SecurityContextHolder
-        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            //lấy ra thông tin người dùng bằng interface UserDatails của Spring
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
+                //tạo đối tượng từ lớp xác thực UsernamePasswordAuthenticationToken của spring security
+                //set userDetails và quyền hạn cho nó
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
                         userDetails.getAuthorities()
                 );
+                // thêm thông tin về ip và trình duyệt của user vào authToken
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
+                //lưu lại người dùng và quyền vào SecurityContextHolder
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }

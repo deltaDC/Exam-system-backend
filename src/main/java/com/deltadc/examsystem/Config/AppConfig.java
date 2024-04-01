@@ -19,12 +19,15 @@ public class AppConfig {
 
     private final UserRepository userRepository;
 
+    // Tạo một bean để cung cấp thông tin về người dùng
     @Bean
     public UserDetailsService userDetailsService() {
+        //tìm kiếm người dùng trong cơ sở dữ liệu
         return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("user not found"));
     }
 
+    // Tạo một bean để cung cấp phương thức xác thực người dùng
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -33,11 +36,13 @@ public class AppConfig {
         return authProvider;
     }
 
+    // Tạo một bean để cung cấp AuthenticationManager, dùng để xác thực người dùng
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
+    // Tạo một bean để cung cấp phương thức mã hóa mật khẩu
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
