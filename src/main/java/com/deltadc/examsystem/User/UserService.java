@@ -46,4 +46,15 @@ public class UserService {
 
         return ResponseEntity.ok(userList);
     }
+
+    public ResponseEntity<?> editUser(Long userId, User newUser) {
+        User user = userRepository.findById(userId).orElseThrow();
+
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok(user);
+    }
 }

@@ -24,6 +24,10 @@ public class UserController {
     }
 
     //chinh sua username va password
+    @PutMapping("/edit/{userId}")
+    public ResponseEntity<?> editUser(@PathVariable("userId") Long userId, @RequestBody User newUser) {
+        return userService.editUser(userId, newUser);
+    }
 
     //tim sinh vien theo username
     @GetMapping("/{username}")
