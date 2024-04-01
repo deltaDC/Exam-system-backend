@@ -47,11 +47,10 @@ public class UserService {
         return ResponseEntity.ok(userList);
     }
 
-    public ResponseEntity<?> editUser(Long userId, User newUser) {
+    public ResponseEntity<?> editUser(Long userId, String newUserName) {
         User user = userRepository.findById(userId).orElseThrow();
 
-        user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
+        user.setUsername(newUserName);
 
         userRepository.save(user);
 
