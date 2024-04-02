@@ -47,4 +47,11 @@ public class UserController {
     public ResponseEntity<?> getAllAdmins() {
         return userService.getAllAdmins();
     }
+
+    //lay tat ca cac user, tinh ca admin
+    @GetMapping("/all-users-admins")
+    public ResponseEntity<?> getALlUsersAdmins() {
+        return userService.getALlUsersAdmins();
+    }
+
 }

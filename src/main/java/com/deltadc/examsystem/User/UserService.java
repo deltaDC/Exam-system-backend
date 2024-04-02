@@ -1,6 +1,10 @@
 package com.deltadc.examsystem.User;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserRepositoryImpl userRepositoryImpl;
 
 //    public ResponseEntity<?> changePassword(String newPassword) {
 //
@@ -55,5 +60,13 @@ public class UserService {
         userRepository.save(user);
 
         return ResponseEntity.ok(user);
+    }
+
+    public ResponseEntity<?> getALlUsersAdmins() {
+        Pageable paging = PageRequest.of(0, 3, Sort.by("username"));
+
+        Page<User> userList = userRepository.findAll(paging);
+
+        return ResponseEntity.ok(userList);
     }
 }
