@@ -27,37 +27,37 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/api/**").permitAll()
+//                                .requestMatchers("/api/**").permitAll()
                                 //auth
-//                                .requestMatchers("/api/auth/**").permitAll()
-//
-//                                //user-answer
-//                                .requestMatchers("/api/user-answer/**").permitAll()
-//
-//                                //question
-//                                .requestMatchers(HttpMethod.GET, "/api/question/**").permitAll()
-//                                .requestMatchers(HttpMethod.POST, "/api/question/**").hasAnyAuthority("ROLE_ADMIN")
-//                                .requestMatchers(HttpMethod.PUT, "/api/question/**").hasAnyAuthority("ROLE_ADMIN")
-//                                .requestMatchers(HttpMethod.DELETE, "/api/question/**").hasAnyAuthority("ROLE_ADMIN")
-//
-//                                //exam result
-//                                .requestMatchers(HttpMethod.GET, "/api/exam-result/**").permitAll()
-//                                .requestMatchers(HttpMethod.POST, "/api/exam-result/**").permitAll()
-//                                .requestMatchers(HttpMethod.PUT, "/api/exam-result/**").hasAnyAuthority("ROLE_ADMIN")
-//                                .requestMatchers(HttpMethod.DELETE, "/api/exam-result/**").hasAnyAuthority("ROLE_ADMIN")
-//
-//                                //exam attempt
-//                                .requestMatchers("/api/exam-attempt/**").permitAll()
-//
-//                                //exam
-//                                .requestMatchers(HttpMethod.GET, "/api/exam/**").permitAll()
-//                                .requestMatchers(HttpMethod.POST, "/api/exam/**").hasAnyAuthority("ROLE_ADMIN")
-//                                .requestMatchers(HttpMethod.PUT, "/api/exam/**").hasAnyAuthority("ROLE_ADMIN")
-//                                .requestMatchers(HttpMethod.DELETE, "/api/exam/**").hasAnyAuthority("ROLE_ADMIN")
-//
-//                                //user
-//                                .requestMatchers("/api/user/**").hasAnyAuthority("ROLE_ADMIN")
-//                                .requestMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers("/api/auth/**").permitAll()
+
+                                //user-answer
+                                .requestMatchers("/api/user-answer/**").permitAll()
+
+                                //question
+                                .requestMatchers(HttpMethod.GET, "/api/question/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/question/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/question/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/question/**").hasAnyAuthority("ROLE_ADMIN")
+
+                                //exam result
+                                .requestMatchers(HttpMethod.GET, "/api/exam-result/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/exam-result/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/exam-result/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/exam-result/**").hasAnyAuthority("ROLE_ADMIN")
+
+                                //exam attempt
+                                .requestMatchers("/api/exam-attempt/**").permitAll()
+
+                                //exam
+                                .requestMatchers(HttpMethod.GET, "/api/exam/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/exam/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/exam/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/exam/**").hasAnyAuthority("ROLE_ADMIN")
+
+                                //user
+                                .requestMatchers("/api/user/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider)
