@@ -13,9 +13,9 @@ public class ExamStatisticController {
     private final ExamStatisticService examStatisticService;
 
     //lay thong ke cua mot ki thi dua theo examId
-    @GetMapping("/{examId}")
-    public ResponseEntity<?> getExamStatisticByExamId(@PathVariable("examId") Long examId) {
-        return examStatisticService.getExamStatisticByExamId(examId);
+    @GetMapping("/get-all-statistic")
+    public ResponseEntity<?> getAllExamStatistic() {
+        return examStatisticService.getExamStatisticByExamId();
     }
 
 }

@@ -27,10 +27,12 @@ public class ExamStatistic {
 
     private double averageScore;
 
+    private String examName;
+
     @OneToOne
     @JoinColumn(name = "examId", insertable = false, updatable = false)
     @JsonIgnore
     private Exam exam;
 
-    private Long examId;
+//    private Long examId;
 }
