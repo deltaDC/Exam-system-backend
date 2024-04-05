@@ -2,6 +2,7 @@ package com.deltadc.examsystem.ExamStatistic;
 
 
 import com.deltadc.examsystem.Exam.Exam;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,9 @@ public class ExamStatistic {
     private double averageScore;
 
     @OneToOne
-    @JoinColumn(name = "examId")
+    @JoinColumn(name = "examId", insertable = false, updatable = false)
+    @JsonIgnore
     private Exam exam;
+
+    private Long examId;
 }
