@@ -45,14 +45,14 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        var user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow();
+        var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         var jwtToken = jwtService.generateToken((UserDetails) user);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(AuthResponse.builder()
                         .token(jwtToken)
                         .username(user.getUsername())
                         .userId(String.valueOf(user.getUserId()))
+                        .role(user.getRole())
                         .build()
                 );
     }
