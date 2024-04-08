@@ -31,12 +31,12 @@ public class UserAnswer {
     private User user;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "examId", insertable = false, updatable = false)
     private Exam exam;
 
     @JsonIgnore
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionId", insertable = false, updatable = false)
     private Question question;
 

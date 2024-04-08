@@ -7,6 +7,8 @@ import com.deltadc.examsystem.ExamAttempt.ExamAttemptRepository;
 import com.deltadc.examsystem.ExamAttempt.ExamAttemptService;
 import com.deltadc.examsystem.ExamResult.ExamResult;
 import com.deltadc.examsystem.ExamResult.ExamResultRepository;
+import com.deltadc.examsystem.User.User;
+import com.deltadc.examsystem.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,8 @@ public class ExamStatisticService {
 
     private final ExamResultRepository examResultRepository;
     private final ExamAttemptRepository examAttemptRepository;
-    private final ExamStatisticRepository examStatisticRepository;
     private final ExamRepository examRepository;
+    private final UserRepository userRepository;
 
     public ResponseEntity<?> getExamStatisticByExamId() {
         List<Exam> exams = examRepository.findAll();
@@ -31,13 +33,18 @@ public class ExamStatisticService {
             long examId = exam.getExamId();
             List<ExamAttempt> examAttempts = examAttemptRepository.findByExamId(examId);
             List<ExamResult> examResultList = examResultRepository.findByExamId(examId);
+            List<User> userList = userRepository.findByRoleContaining("USER");
 
             double completionRate;
 
-            if(examAttempts.size() > 0) {
-                completionRate = (double) examResultList.size() / examAttempts.size();
+            if(userList.size() > 0) {
+                completionRate = (double) examResultList.size() / userList.size();
             } else {
                 completionRate = 0.0;
+            }
+            completionRate *= 100;
+            if(completionRate > 100) {
+                completionRate = 100;
             }
             int totalParticipants = examAttempts.size();
 

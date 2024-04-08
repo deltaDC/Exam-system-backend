@@ -37,12 +37,12 @@ public class Question {
 
     private Long examId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "examId", insertable = false, updatable=false)
     private Exam exam;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "questionId", insertable = false, updatable=false)
     private List<UserAnswer> userAnswers;

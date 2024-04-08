@@ -30,7 +30,7 @@ public class ExamResult {
     @JoinColumn(name = "userId", insertable = false, updatable=false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "examId", insertable = false, updatable=false)
     private Exam exam;

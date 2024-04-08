@@ -26,6 +26,11 @@ public class ExamResultService {
 
         User user = userRepository.findById(userId).orElseThrow();
         Exam exam = examRepository.findById(examId).orElseThrow();
+        List<ExamResult> examResultHistory = examResultRepository.findByUserIdAndExamId(userId, examId);
+        if(examResultHistory.size() > 1) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Nguoi dung da nop bai thi nay truoc do");
+        }
 
         ExamResult newResult = new ExamResult(
                 examResult.getUserId(),

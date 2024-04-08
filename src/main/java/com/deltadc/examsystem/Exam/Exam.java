@@ -42,23 +42,23 @@ public class Exam {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC")
     private Date endTime;
 
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ExamResult> examResults;
 
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ExamAttempt> examAttempts;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
     private List<Question> questions;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "exam")
+    @OneToOne(mappedBy = "exam", cascade = CascadeType.ALL)
     private ExamStatistic examStatistic;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
     private List<UserAnswer> userAnswers;
 }
