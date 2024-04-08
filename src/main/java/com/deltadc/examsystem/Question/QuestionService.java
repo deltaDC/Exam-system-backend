@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,8 +53,23 @@ public class QuestionService {
     }
 
     public ResponseEntity<?> getQuestionsByExamId(Long examId) {
-        List<Question> questionList = questionRepository.findByExamId(examId);
-        return ResponseEntity.ok(questionList);
+        Exam exam = examRepository.findById(examId).orElseThrow();
+//        System.out.println(exam.getStartTime());
+//        System.out.println(exam.getEndTime());
+//
+//        List<Question> questionList = questionRepository.findByExamId(examId);
+//        return ResponseEntity.ok(questionList);
+
+        Date currentTime = new Date();
+        Date startTime = exam.getStartTime();
+        Date endTime = exam.getEndTime();
+
+        if (currentTime.after(startTime) && currentTime.before(endTime)) {
+            List<Question> questionList = questionRepository.findByExamId(examId);
+            return ResponseEntity.ok(questionList);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ngoai thoi gian thi");
+        }
     }
 
     public ResponseEntity<?> deleteQuestionById(Long questionId) {
