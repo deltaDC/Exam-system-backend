@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -54,22 +56,35 @@ public class QuestionService {
 
     public ResponseEntity<?> getQuestionsByExamId(Long examId) {
         Exam exam = examRepository.findById(examId).orElseThrow();
-//        System.out.println(exam.getStartTime());
-//        System.out.println(exam.getEndTime());
+        System.out.println(exam.getStartTime());
+        System.out.println(exam.getEndTime());
+
+        List<Question> questionList = questionRepository.findByExamId(examId);
+        return ResponseEntity.ok(questionList);
+
+//        Date currentTime = new Date();
+//        Date startTime = exam.getStartTime();
+//        Date endTime = exam.getEndTime();
 //
-//        List<Question> questionList = questionRepository.findByExamId(examId);
-//        return ResponseEntity.ok(questionList);
-
-        Date currentTime = new Date();
-        Date startTime = exam.getStartTime();
-        Date endTime = exam.getEndTime();
-
-        if (currentTime.after(startTime) && currentTime.before(endTime)) {
-            List<Question> questionList = questionRepository.findByExamId(examId);
-            return ResponseEntity.ok(questionList);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ngoai thoi gian thi");
-        }
+//        // Define date format
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//        // Format dates to strings
+//        String currentTimeStr = sdf.format(currentTime);
+//        String startTimeStr = sdf.format(startTime);
+//        String endTimeStr = sdf.format(endTime);
+//
+//        System.out.println(currentTimeStr);
+//        System.out.println(startTimeStr);
+//        System.out.println(endTimeStr);
+//
+//
+//        if (currentTimeStr.compareTo(startTimeStr) >= 0 && currentTimeStr.compareTo(endTimeStr) < 0) {
+//            List<Question> questionList = questionRepository.findByExamId(examId);
+//            return ResponseEntity.ok(questionList);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ngoai thoi gian thi");
+//        }
     }
 
     public ResponseEntity<?> deleteQuestionById(Long questionId) {

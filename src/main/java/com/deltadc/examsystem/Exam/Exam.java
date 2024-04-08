@@ -35,11 +35,11 @@ public class Exam {
     private String examType;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC+7")
     private Date startTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC+7")
     private Date endTime;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
