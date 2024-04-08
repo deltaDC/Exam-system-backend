@@ -16,7 +16,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserRepositoryImpl userRepositoryImpl;
 
 //    public ResponseEntity<?> changePassword(String newPassword) {
 //
