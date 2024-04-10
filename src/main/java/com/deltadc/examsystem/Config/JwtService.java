@@ -26,6 +26,7 @@ public class JwtService {
 
     private static final String SECRET_KEY = "A567A9AC2BA2989C9AABDE8DBD45512678358123578146";
 
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -38,7 +39,12 @@ public class JwtService {
 
     // sinh ra token mới
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> hashMap = new HashMap<>();
+        System.out.println(userDetails.getAuthorities());
+        hashMap.put("name", userDetails.getUsername());
+        hashMap.put("role",userDetails.getAuthorities());
+        return generateToken(hashMap, userDetails);
+//        return generateToken(new HashMap<>(), userDetails);
     }
 
     // sinh ra token mới với extraClaims
