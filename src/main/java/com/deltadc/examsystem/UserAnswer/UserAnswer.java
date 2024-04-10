@@ -36,7 +36,7 @@ public class UserAnswer {
     private Exam exam;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionId", insertable = false, updatable = false)
     private Question question;
 

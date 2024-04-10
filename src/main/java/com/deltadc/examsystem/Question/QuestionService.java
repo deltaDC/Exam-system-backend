@@ -7,9 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,9 +63,10 @@ public class QuestionService {
 //        Date startTime = exam.getStartTime();
 //        Date endTime = exam.getEndTime();
 //
+//
 //        // Define date format
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
+//        sdf.setTimeZone(TimeZone.getTimeZone("UTC+7"));
 //        // Format dates to strings
 //        String currentTimeStr = sdf.format(currentTime);
 //        String startTimeStr = sdf.format(startTime);

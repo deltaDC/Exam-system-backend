@@ -37,7 +37,7 @@ public class Question {
 
     private Long examId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "examId", insertable = false, updatable=false)
     private Exam exam;

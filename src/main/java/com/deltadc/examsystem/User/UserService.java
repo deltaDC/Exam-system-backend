@@ -16,7 +16,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserRepositoryImpl userRepositoryImpl;
 
 //    public ResponseEntity<?> changePassword(String newPassword) {
 //
@@ -42,14 +41,34 @@ public class UserService {
 
     public ResponseEntity<?> getAllUsers() {
         List<User> userList = userRepository.findByRoleContaining("USER");
+        List<UserDTO> userDTOS = userList.stream()
+                .map(user -> {
+                    UserDTO userDTO = new UserDTO();
+                    userDTO.setUserId(user.getUserId());
+                    userDTO.setUsername(user.getUsername());
+                    userDTO.setRole(user.getRole());
 
-        return ResponseEntity.ok(userList);
+                    return userDTO;
+                })
+                .toList();
+
+        return ResponseEntity.ok(userDTOS);
     }
 
     public ResponseEntity<?> getAllAdmins() {
         List<User> userList = userRepository.findByRoleContaining("ADMIN");
+        List<UserDTO> userDTOS = userList.stream()
+                .map(user -> {
+                    UserDTO userDTO = new UserDTO();
+                    userDTO.setUserId(user.getUserId());
+                    userDTO.setUsername(user.getUsername());
+                    userDTO.setRole(user.getRole());
 
-        return ResponseEntity.ok(userList);
+                    return userDTO;
+                })
+                .toList();
+
+        return ResponseEntity.ok(userDTOS);
     }
 
     public ResponseEntity<?> editUser(Long userId, String newUserName) {
