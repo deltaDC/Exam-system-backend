@@ -1,15 +1,23 @@
 package com.deltadc.examsystem.User;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.naming.Name;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -87,5 +95,28 @@ public class UserService {
         Page<User> userList = userRepository.findAll(paging);
 
         return ResponseEntity.ok(userList);
+    }
+
+    public ResponseEntity<?> testModifying(String username) {
+        userRepository.deleteByUsername(username);
+
+        return ResponseEntity.ok("da update " + username);
+    }
+
+    private Specification<User> nameLike(String name) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("username"), "%" + name.toLowerCase() + "%");
+//        return ((root, query, criteriaBuilder) -> criteriaBuilder.in
+    }
+
+    public ResponseEntity<?> testSpecification() {
+        List<User> userList = userRepository.findAll(nameLike("p"));
+
+        return ResponseEntity.ok(userList);
+    }
+
+    public ResponseEntity<?> testProjection() {
+//        List<NameOnly> userList = userRepository.findByCustomQuery("pdc2");
+        Collection<NameOnly> userCollection = userRepository.findByUsername("pdc2", NameOnly.class);
+        return ResponseEntity.ok(userCollection);
     }
 }

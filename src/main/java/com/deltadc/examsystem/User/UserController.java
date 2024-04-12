@@ -2,6 +2,7 @@ package com.deltadc.examsystem.User;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -54,4 +55,20 @@ public class UserController {
         return userService.getALlUsersAdmins();
     }
 
+    @DeleteMapping("/test-modifying/{username}")
+    @Transactional
+    public ResponseEntity<?> testModifying(@PathVariable("username") String username) {
+        System.out.println(username);
+        return userService.testModifying(username);
+    }
+
+    @GetMapping("/test-specification")
+    public ResponseEntity<?> testSpecification() {
+        return userService.testSpecification();
+    }
+
+    @GetMapping("/test-projection")
+    public ResponseEntity<?> testProjection() {
+        return userService.testProjection();
+    }
 }
