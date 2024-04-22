@@ -24,7 +24,7 @@ JwtService để thực hiện các service liên quan đến token
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "A567A9AC2BA2989C9AABDE8DBD45512678358123578146";
+    private static final String SECRET_KEY = "";
 
 
     public String extractUsername(String token) {
